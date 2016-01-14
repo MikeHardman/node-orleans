@@ -4,6 +4,7 @@ module.exports = function(options){
 
 	var template = '\
 #r "Orleans.dll" \n\
+#r "OrleansAzureUtils.dll" \n\
 #r "$(grainDll)"  \n\
 using $(grainNamespace); \n\
 using Orleans; \n\
