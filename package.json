@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/OrleansContrib/node-orleans",
   "dependencies": {
-    "Edge.js": "~4.0.0"
+    "edge": "~5.0.0"
   }
 }
