@@ -42,7 +42,7 @@ public class Startup \n\
 
 	return {
 		init: function(callback){
-			var cs = getFuncTemplate("OrleansClient.Initialize();\nreturn TaskDone.Done;")
+			var cs = getFuncTemplate("GrainClient.Initialize();\nreturn TaskDone.Done;")
 			edge.func(cs)(null, callback);
 		},
 		call: function(grainType, grainId, grainMethod, arguments, callback){
@@ -53,13 +53,13 @@ public class Startup \n\
 
 			if (hasReturnValue){
 				var innerCs = "\
-				var grain = " + grainType + "Factory.GetGrain(" + formatId(grainId) + ");\n\
+				var grain = GrainClient.GrainFactory.GetGrain<" + grainType + ">(" + formatId(grainId) + ");\n\
 				var result = await grain." + grainMethod + "(" + argsToString(arguments) + ");\n\
 				return result as object;\n\
 				";
 			} else {
 				var innerCs = "\
-				var grain = " + grainType + "Factory.GetGrain(" + formatId(grainId) + ");\n\
+				var grain = GrainClient.GrainFactory.GetGrain<" +  grainType + ">(" + formatId(grainId) + ");\n\
 				await grain." + grainMethod + "(" + argsToString(arguments) + ");\n\
 				return null;\n\
 				";
