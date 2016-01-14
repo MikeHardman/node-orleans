@@ -9,6 +9,7 @@ module.exports = function(options){
 #r "OrleansAzureUtils.dll" \n\
 #r "Microsoft.WindowsAzure.Configuration.dll" \n\
 #r "Microsoft.WindowsAzure.Storage.dll" \n\
+#r "Newtonsoft.Json.dll" \n\
 #r "$(grainDll)"  \n\
 using $(grainNamespace); \n\
 using Orleans; \n\
@@ -16,7 +17,7 @@ using System; \n\
 using System.Threading.Tasks; \n\
 public class Startup \n\
 {  \n\
-    public async Task<object> Invoke(object input)  \n\
+    public async Task<string> Invoke(object input)  \n\
     {  \n\
 		$(innerCs) \n\
     } \n\
@@ -60,13 +61,13 @@ public class Startup \n\
 				var innerCs = "\
 				var grain = GrainClient.GrainFactory.GetGrain<" + grainType + ">(" + formatId(grainId) + ");\n\
 				var result = await grain." + grainMethod + "(" + argsToString(arguments) + ");\n\
-				return result as object;\n\
+				return JsonConvert.SerializeObject(result);\n\
 				";
 			} else {
 				var innerCs = "\
 				var grain = GrainClient.GrainFactory.GetGrain<" +  grainType + ">(" + formatId(grainId) + ");\n\
 				await grain." + grainMethod + "(" + argsToString(arguments) + ");\n\
-				return null;\n\
+				return String.Empty;\n\
 				";
 			}
 
