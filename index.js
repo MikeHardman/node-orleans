@@ -70,8 +70,8 @@ public class Startup \n\
 				return Task.FromResult(String.Empty);\n\
 				";
 			}
-
-			var cs = getFuncTemplate(innerCs)
+			Console.log(cs);
+			var cs = getFuncTemplate(innerCs);
 			edge.func(cs)(null, callback);
 		}
 	};
