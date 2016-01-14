@@ -4,8 +4,11 @@ module.exports = function(options){
 
 	var template = '\
 #r "Orleans.dll" \n\
+#r "OrleansRuntime.dll" \n\
 #r "OrleansProviders.dll" \n\
 #r "OrleansAzureUtils.dll" \n\
+#r "Microsoft.WindowsAzure.Configuration.dll" \n\
+#r "Microsoft.WindowsAzure.Storage.dll" \n\
 #r "$(grainDll)"  \n\
 using $(grainNamespace); \n\
 using Orleans; \n\
