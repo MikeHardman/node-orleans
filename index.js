@@ -61,13 +61,13 @@ public class Startup \n\
 				var innerCs = "\
 				var grain = GrainClient.GrainFactory.GetGrain<" + grainType + ">(" + formatId(grainId) + ");\n\
 				var result = await grain." + grainMethod + "(" + argsToString(arguments) + ");\n\
-				return JsonConvert.SerializeObject(result);\n\
+				return Task.FromResult(JsonConvert.SerializeObject(result));\n\
 				";
 			} else {
 				var innerCs = "\
 				var grain = GrainClient.GrainFactory.GetGrain<" +  grainType + ">(" + formatId(grainId) + ");\n\
 				await grain." + grainMethod + "(" + argsToString(arguments) + ");\n\
-				return String.Empty;\n\
+				return Task.FromResult(String.Empty);\n\
 				";
 			}
 
